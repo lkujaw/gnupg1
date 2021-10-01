@@ -26,12 +26,12 @@
 #include "keydb.h"
 
 /* It could be argued that the default cipher should be 3DES rather
-   than AES128, and the default compression should be 0
+   than AES256, and the default compression should be 0
    (i.e. uncompressed) rather than 1 (zip).  However, the real world
    issues of speed and size come into play here. */
 
 #if USE_AES
-# define DEFAULT_CIPHER_ALGO     CIPHER_ALGO_AES
+# define DEFAULT_CIPHER_ALGO     CIPHER_ALGO_AES256
 #elif USE_CAST5
 # define DEFAULT_CIPHER_ALGO     CIPHER_ALGO_CAST5
 #else
