@@ -2863,9 +2863,7 @@ main (int argc, char **argv )
 	    break;
 
 	  case oEnableLargeRSA:
-#if SECMEM_BUFFER_SIZE >= 65536
-            opt.flags.large_rsa=1;
-#else
+#if RSA_MAX_KEYSIZE == 4096
             if (configname)
               log_info("%s:%d: WARNING: gpg not built with large secure "
                          "memory buffer.  Ignoring enable-large-rsa\n",
@@ -2873,9 +2871,9 @@ main (int argc, char **argv )
             else
               log_info("WARNING: gpg not built with large secure "
                          "memory buffer.  Ignoring --enable-large-rsa\n");
-#endif /* SECMEM_BUFFER_SIZE >= 65536 */
+#endif /* RSA_MAX_KEYSIZE == 4096 */
             break;
-	  case oDisableLargeRSA: opt.flags.large_rsa=0;
+	  case oDisableLargeRSA:
             break;
 
 	  case oEnableDSA2: opt.flags.dsa2=1; break;

@@ -1041,8 +1041,8 @@ gen_elg(int algo, unsigned nbits, KBNODE pub_root, KBNODE sec_root, DEK *dek,
 	nbits = 2048;
 	log_info(_("keysize invalid; using %u bits\n"), nbits );
     }
-    else if (nbits > 4096) {
-        nbits = 4096;
+    else if (nbits > RSA_MAX_KEYSIZE) {
+        nbits = RSA_MAX_KEYSIZE;
         log_info(_("keysize invalid; using %u bits\n"), nbits );
     }
 
@@ -1251,7 +1251,7 @@ gen_rsa(int algo, unsigned nbits, KBNODE pub_root, KBNODE sec_root, DEK *dek,
     PKT_public_key *pk;
     MPI skey[6];
     MPI *factors;
-    const unsigned maxsize = (opt.flags.large_rsa ? 8192 : 4096);
+    const unsigned maxsize = RSA_MAX_KEYSIZE;
 
     assert( is_RSA(algo) );
 
@@ -1578,7 +1578,7 @@ ask_algo (int addmode, int *r_subkey_algo, unsigned int *r_usage)
 static unsigned int
 ask_keysize (int algo, unsigned int primary_keysize)
 {
-  unsigned nbits, min, def=2048, max=4096;
+  unsigned nbits, min, def=2048, max=RSA_MAX_KEYSIZE;
   int for_subkey = !!primary_keysize;
   int autocomp = 0;
 

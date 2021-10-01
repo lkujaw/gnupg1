@@ -180,12 +180,16 @@ AC_ARG_ENABLE(large-secmem,
               large_secmem=$enableval, large_secmem=no)
 AC_MSG_RESULT($large_secmem)
 if test "$large_secmem" = yes ; then
-   SECMEM_BUFFER_SIZE=65536
+   SECMEM_BUFFER_SIZE=131072
+   RSA_MAX_KEYSIZE=16384
 else
    SECMEM_BUFFER_SIZE=32768
+   RSA_MAX_KEYSIZE=4096
 fi
 AC_DEFINE_UNQUOTED(SECMEM_BUFFER_SIZE,$SECMEM_BUFFER_SIZE,
                    [Size of secure memory buffer])
+AC_DEFINE_UNQUOTED(RSA_MAX_KEYSIZE,$RSA_MAX_KEYSIZE,
+                   [Maximum RSA key size in bits])
 
 
 AC_MSG_CHECKING([whether OpenPGP card support is requested])
