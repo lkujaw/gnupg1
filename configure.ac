@@ -265,7 +265,7 @@ fi
 
 AC_MSG_CHECKING([whether to enable the CAMELLIA cipher])
 AC_ARG_ENABLE(camellia,
-   AC_HELP_STRING([--enable-camellia],[enable the CAMELLIA cipher]),
+   AC_HELP_STRING([--disable-camellia],[disable the CAMELLIA cipher]),
    use_camellia=$enableval)
 AC_MSG_RESULT($use_camellia)
 if test x"$use_camellia" = xyes ; then
