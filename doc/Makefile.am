@@ -59,6 +59,7 @@ yat2m-stamp: $(myman_sources)
 	@touch yat2m-stamp.tmp
 	for file in $(myman_sources) ; do \
               ./yat2m $(YAT2M_OPTIONS) --store \
+                  `test -z "$(SOURCE_DATE_EPOCH)" || echo '--date' "$(SOURCE_DATE_EPOCH)"` \
 	          `test -f '$$file' || echo '$(srcdir)/'`$$file ; done
 	@mv -f yat2m-stamp.tmp $@
 
