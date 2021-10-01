@@ -28,16 +28,12 @@ min_automake_version="1.14"
 # another commit and push so that the git magic is able to work.
 m4_define([mym4_version], [1.4.24])
 
-# Below is m4 magic to extract and compute the git revision number,
-# the decimalized short revision number, a beta version string and a
+# Below is m4 magic to extract and compute a beta version string and a
 # flag indicating a development version (mym4_isgit).  Note that the
 # m4 processing is done by autoconf and not during the configure run.
-m4_define([mym4_revision],
-          m4_esyscmd([git rev-parse --short HEAD | tr -d '\n\r']))
-m4_define([mym4_revision_dec],
-          m4_esyscmd_s([echo $((0x$(echo ]mym4_revision[|head -c 4)))]))
 m4_define([mym4_betastring],
-          m4_esyscmd_s([git describe --match 'gnupg-1.[0-9].*[0-9]' --long|\
+          m4_esyscmd_s([git describe --match 'gnupg-1.[0-9].*[0-9]' \
+                                     --long 2>/dev/null |\
                         awk -F- '$3!=0{print"-beta"$3}']))
 m4_define([mym4_isgit],m4_if(mym4_betastring,[],[no],[yes]))
 m4_define([mym4_full_version],[mym4_version[]mym4_betastring])
