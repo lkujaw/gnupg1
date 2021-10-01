@@ -94,7 +94,7 @@ endif
 
 ./gpg_dearmor:
 	echo '#!/bin/sh' >./gpg_dearmor
-	echo "../g10/gpg --no-options --no-greeting \
+	echo "../g10/gpg --homedir . --no-options --no-greeting \
              --no-secmem-warning --batch --dearmor" >>./gpg_dearmor
 	chmod 755 ./gpg_dearmor
 
