@@ -1396,7 +1396,7 @@ make_keysig_packet( PKT_signature **ret_sig, PKT_public_key *pk,
 
     if( !digest_algo )
       {
-	/* Basically, this means use SHA1 always unless it's a v3 RSA
+	/* Basically, this means use the default digest algo always unless it's a v3 RSA
 	   key making a v3 cert (use MD5), or the user specified
 	   something (use whatever they said), or it's DSA (use the
 	   best match).  They still can't pick an inappropriate hash
@@ -1412,7 +1412,7 @@ make_keysig_packet( PKT_signature **ret_sig, PKT_public_key *pk,
 	else if(sk->pubkey_algo==PUBKEY_ALGO_DSA)
 	  digest_algo = match_dsa_hash(mpi_get_nbits(sk->skey[1])/8);
 	else
-	  digest_algo = DIGEST_ALGO_SHA1;
+	  digest_algo = DEFAULT_DIGEST_ALGO;
       }
 
     md = md_open( digest_algo, 0 );
