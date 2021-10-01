@@ -32,8 +32,17 @@ rol( u32 x, int n)
 		:"0" (x),"c" (n));
 	return x;
 }
+static inline u32
+ror( u32 x, int n)
+{
+	__asm__("rorl %%cl,%0"
+		:"=r" (x)
+		:"0" (x),"c" (n));
+	return x;
+}
 #else
 #define rol(x,n) ( ((x) << (n)) | ((x) >> (32-(n))) )
+#define ror(x,n) ( ((x) >> (n)) | ((x) << (32-(n))) )
 #endif
 
 

@@ -35,7 +35,7 @@
 /*#define ALLOW_DUMMY 1 */
 
 #define MAX_BLOCKSIZE 16
-#define TABLE_SIZE 14
+#define TABLE_SIZE 16
 
 struct cipher_table_s {
     const char *name;
@@ -222,6 +222,42 @@ setup_cipher_table(void)
     i++;
 #endif
 
+#ifdef USE_SERPENT
+    cipher_table[i].algo = CIPHER_ALGO_SERPENT128;
+    cipher_table[i].name = serpent_get_info( cipher_table[i].algo,
+					     &cipher_table[i].keylen,
+					     &cipher_table[i].blocksize,
+					     &cipher_table[i].contextsize,
+					     &cipher_table[i].setkey,
+					     &cipher_table[i].encrypt,
+					     &cipher_table[i].decrypt     );
+    if( !cipher_table[i].name )
+	BUG();
+    i++;
+    cipher_table[i].algo = CIPHER_ALGO_SERPENT192;
+    cipher_table[i].name = serpent_get_info( cipher_table[i].algo,
+					     &cipher_table[i].keylen,
+					     &cipher_table[i].blocksize,
+					     &cipher_table[i].contextsize,
+					     &cipher_table[i].setkey,
+					     &cipher_table[i].encrypt,
+					     &cipher_table[i].decrypt     );
+    if( !cipher_table[i].name )
+	BUG();
+    i++;
+    cipher_table[i].algo = CIPHER_ALGO_SERPENT256;
+    cipher_table[i].name = serpent_get_info( cipher_table[i].algo,
+					     &cipher_table[i].keylen,
+					     &cipher_table[i].blocksize,
+					     &cipher_table[i].contextsize,
+					     &cipher_table[i].setkey,
+					     &cipher_table[i].encrypt,
+					     &cipher_table[i].decrypt     );
+    if( !cipher_table[i].name )
+	BUG();
+    i++;
+#endif
+
 #ifdef USE_IDEA
     cipher_table[i].algo = CIPHER_ALGO_IDEA;
     cipher_table[i].name = idea_get_info( cipher_table[i].algo,
@@ -248,6 +284,7 @@ setup_cipher_table(void)
     i++;
 #endif
 
+    assert(i < TABLE_SIZE);  /* we need a NULL element to mark the end */
     for( ; i < TABLE_SIZE; i++ )
 	cipher_table[i].name = NULL;
 }

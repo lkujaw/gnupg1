@@ -37,6 +37,7 @@ libcipher_a_SOURCES = cipher.c	\
 		 cast5.c	\
 		 rijndael.c     \
 		 camellia.c camellia.h camellia-glue.c \
+		 serpent.c	\
 		 idea.c		\
 		 elgamal.c	\
 		 elgamal.h	\

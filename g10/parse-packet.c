@@ -1910,6 +1910,7 @@ parse_key( IOBUF inp, int pkttype, unsigned long pktlen,
 	      case 7: case 8: case 9: /* AES */
 	      case 10: /* Twofish */
 	      case 11: case 12: case 13: /* Camellia */
+	      case 14: case 15: case 16: /* Serpent */
 		sk->protect.ivlen = 16;
 		break;
 	      default:

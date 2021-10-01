@@ -146,6 +146,7 @@ use_blowfish=yes
 use_aes=yes
 use_twofish=yes
 use_camellia=yes
+use_serpent=yes
 use_sha256=yes
 use_sha512=yes
 use_bzip2=yes
@@ -165,6 +166,7 @@ AC_ARG_ENABLE(minimal,
    use_aes=no
    use_twofish=no
    use_camellia=no
+   use_serpent=no
    use_sha256=no
    use_sha512=no
    use_bzip2=no
@@ -270,6 +272,15 @@ AC_ARG_ENABLE(camellia,
 AC_MSG_RESULT($use_camellia)
 if test x"$use_camellia" = xyes ; then
    AC_DEFINE(USE_CAMELLIA,1,[Define to include the CAMELLIA cipher])
+fi
+
+AC_MSG_CHECKING([whether to enable the SERPENT cipher])
+AC_ARG_ENABLE(serpent,
+   AC_HELP_STRING([--disable-serpent],[disable the SERPENT cipher]),
+   use_serpent=$enableval)
+AC_MSG_RESULT($use_serpent)
+if test x"$use_serpent" = xyes ; then
+   AC_DEFINE(USE_SERPENT,1,[Define to include the SERPENT cipher])
 fi
 
 AC_MSG_CHECKING([whether to enable the SHA-224 and SHA-256 digests])
